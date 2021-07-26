@@ -1,55 +1,50 @@
+import React from 'react'
 //import useState which is a hook to be able to use it
 import { useState } from 'react'
+import RegistrationForm from '../components/RegistrationForm'
+//import axios to send a request to the back end
+import axios from 'axios'
+//import those to handle notification
+import { toast } from 'react-toastify'
+//import the register funtion from auth action
+import { register } from '../actions/auth'
 
 //create a arrow function
-const Register = () => {
+const Register = ({ history }) => {
   //create a state to starage the the username, email and password
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const submitForm = () => {
-    alert('send user info to backend')
+  //console.log("history", history);
+
+  const submitForm = async (e) => {
+    //we add async keyword to the event to be able to await for a request to handle it
+    //alert('send user info to backend')
+    e.preventDefault()
+    //console.table({ name, email, password })
+    try {
+      //axios makes a post request to the end point which takes two argument the url and the data
+      //replace the code for a register function which has the action on the auth action file
+      const res = await register({
+        name,
+        email,
+        password,
+      })
+      //we see this message in the console
+      console.log('REGISTER USER ===>', res)
+      //add the toast function to see the toast message
+      toast('Registered successfully. Please Login.')
+      //once the registration has been succesfull it is redirect to Login page
+      history.push('/login')
+    } catch (err) {
+      console.log(err)
+      if (err.response.status === 400) toast(err.response.data)
+    }
   }
 
-  const registrationForm = () => (
-    <form onSubmit={submitForm} className="mt-3">
-      <div className="form-group mb-3">
-        <label className="form-label">Name</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Enter name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </div>
-      <div className="form-group mb-3">
-        <label className="form-label">Email address</label>
-        <input
-          className="form-control"
-          type="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-      <div className="form-group mb-3">
-        <label className="form-label">Password</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button className="btn btn-primary">Submit</button>
-    </form>
-  )
+  //only to check if the client has access to this port
+  //console.log(process.env.REACT_APP_API);
 
   return (
     <>
@@ -59,7 +54,17 @@ const Register = () => {
 
       <div className="container">
         <div className="row">
-          <div className="col-md-6 offset-md-3">{registrationForm()}</div>
+          <div className="col-md-6 offset-md-3">
+            <RegistrationForm
+              submitForm={submitForm}
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+            />
+          </div>
         </div>
       </div>
     </>
