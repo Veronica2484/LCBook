@@ -4,7 +4,7 @@ import { authenticationReducer } from './authLog'
 
 //3. combine multiple reducers
 const rootReducer = combineReducers({
-  user: authenticationReducer,
+  auth: authenticationReducer,
 })
 
 export default rootReducer
