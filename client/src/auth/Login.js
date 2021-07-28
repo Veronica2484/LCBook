@@ -30,7 +30,7 @@ const Login = ({ history }) => {
           type: 'LOGGED_IN_USER',
           payload: res.data,
         })
-        history.push('/')
+        history.push('/services')
       }
     } catch (err) {
       console.log(err)
@@ -41,7 +41,7 @@ const Login = ({ history }) => {
 
   return (
     <>
-      <div className="container-fluid bg-secondary p-5 text-center">
+      <div className="container-fluid p-5 text-center banner">
         <h1>Login</h1>
       </div>
 

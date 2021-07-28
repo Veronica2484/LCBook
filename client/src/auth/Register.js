@@ -48,7 +48,7 @@ const Register = ({ history }) => {
 
   return (
     <>
-      <div className="container-fluid bg-secondary p-5 text-center">
+      <div className="container-fluid bg-muted p-5 text-center banner">
         <h1>Register</h1>
       </div>
 

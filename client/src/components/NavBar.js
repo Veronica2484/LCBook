@@ -24,21 +24,20 @@ const NavBar = () => {
   }
 
   return (
-    <div className="nav bg-light d-flex justify-content-between">
-      <Link className="nav-link" to="/">
+    <div className="nav bg-light d-flex justify-content-between col-sm">
+      <Link className="nav-link " to="/">
         Home
       </Link>
 
-      <Link className="nav-link" to="/services">
-        Services
-      </Link>
-      <Link className="nav-link" to="/maintain">
-        Maintain
-      </Link>
+      {auth !== null && (
+        <Link className="nav-link " to="/services">
+          Services
+        </Link>
+      )}
 
       {auth !== null && (
         //add the pointer class to add a pointer to the logout function
-        <href className="nav-link pointer" onClick={logout}>
+        <href className="nav-link pointer  " onClick={logout}>
           Logout
         </href>
       )}
@@ -46,10 +45,10 @@ const NavBar = () => {
       {auth === null && (
         <>
           {''}
-          <Link className="nav-link" to="/login">
+          <Link className="nav-link " to="/login">
             Login
           </Link>
-          <Link className="nav-link" to="/register">
+          <Link className="nav-link " to="/register">
             Register
           </Link>
           {''}
