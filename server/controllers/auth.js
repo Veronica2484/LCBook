@@ -10,18 +10,20 @@ import User from '../models/user'
 import jwt from 'jsonwebtoken'
 
 export const register = async (req, res) => {
-  //as the app receives the data in JSON format, it is needed to apply a milddleware in order to be able to read it
-  console.log(req.body)
-  const { name, email, password } = req.body
-  //validate name and password
-  if (!name) return res.status(400).send('Name is required')
-  if (!password || password.length < 6)
-    return res.status(400).send('Password is required and minimun 6 char long')
-  let userExist = await User.findOne({ email }).exec()
-  if (userExist) return res.status(400).send('Email already exist')
-  //register the new user based in the data from the schema
-  const user = new User(req.body)
   try {
+    //as the app receives the data in JSON format, it is needed to apply a milddleware in order to be able to read it
+    console.log(req.body)
+    const { name, email, password } = req.body
+    //validate name and password
+    if (!name) return res.status(400).send('Name is required')
+    if (!password || password.length < 6)
+      return res
+        .status(400)
+        .send('Password is required and minimun 6 char long')
+    let userExist = await User.findOne({ email }).exec()
+    if (userExist) return res.status(400).send('Email already exist')
+    //register the new user based in the data from the schema
+    const user = new User(req.body)
     await user.save()
     console.log('Registration successfull', user)
     //response to send
