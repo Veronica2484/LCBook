@@ -1,13 +1,22 @@
 //install hooks from react
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import AlgoliaPlaces from 'algolia-places-react'
+import { DatePicker, Select } from 'antd'
+import { createItem } from '../actions/item'
+import { useSelector } from 'react-redux'
+import ItemCreateForm from '../components/forms/ItemCreateForm'
+
+//distruct a Select
+const { Option } = Select
 
 //create a arrow function
 const NewItem = () => {
+  //add redux
+  const { auth } = useSelector((state) => ({ ...state }))
+  const { token } = auth
   //define state
   const [values, setValues] = useState({
-    bookTitle: '',
+    itemTitle: '',
     author: '',
     city: '',
     status: '',
@@ -17,26 +26,89 @@ const NewItem = () => {
     to: '',
     quantity: '',
   })
+  const [preview, setPreview] = useState(
+    'https://via.placeholder.com/100x100.png?text=PREVIEW'
+  )
   //variables from state
-  const { bookTitle, author, city, status, price, image, from, to, quantity } =
+  const { itemTitle, author, city, status, price, image, from, to, quantity } =
     values
 
-  const handleSubmit = (e) => {
-    //
+  //do a request to the backend
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    //console.log(values)
+
+    //instance Form Data
+    let itemData = new FormData()
+    //add the data
+    itemData.append('itemTitle', itemTitle)
+    itemData.append('author', author)
+    itemData.append('city', city)
+    itemData.append('status', status)
+    itemData.append('price', price)
+    //send the image as binary data
+    image && itemData.append('image', image)
+    itemData.append('from', from)
+    itemData.append('to', to)
+    itemData.append('quantity', quantity)
+
+    console.log([...itemData])
+    try {
+      //put the createItem fc in a variable
+      let res = await createItem(token, itemData)
+      console.log('Created item res', res)
+      toast.success('New item has been added')
+      //empty the fields after 1 sec, reload
+      setTimeout(() => {
+        window.location.reload()
+      }, 2000)
+    } catch (err) {
+      console.log(err)
+      toast.error(err.response.data)
+    }
   }
 
-  const handleImageChange = (e) => {}
+  const handleImageChange = (e) => {
+    //console.log(e.target.files[0])
+    //it will set the image in the state and will show the previous image
+    setPreview(URL.createObjectURL(e.target.files[0]))
+    setValues({ ...values, image: e.target.files[0] })
+  }
 
-  const handleChange = () => {}
+  //pupulate the state
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value })
+  }
 
-  const bookForm = () => (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label className="btn btn-outline-secondary btn-block m-2 text-left"></label>
+  return (
+    <>
+      <div className="container-fluid services p-5 text-center">
+        <h2>Add New Item</h2>
       </div>
-    </form>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-10">
+            <br />
+            <ItemCreateForm
+              values={values}
+              setValues={setValues}
+              handleChange={handleChange}
+              handleImageChange={handleImageChange}
+              handleSubmit={handleSubmit}
+            />
+          </div>
+          <div className="col-md-2">
+            <img
+              src={preview}
+              alt="preview_image"
+              className="img img-fluid m-2"
+            />
+            <pre>{JSON.stringify(values, null, 4)}</pre>
+          </div>
+        </div>
+      </div>
+    </>
   )
-  return <div className="container-fluid h1 p-5 text-center">New Items</div>
 }
 
 //exporting this we can import and use it in another component
