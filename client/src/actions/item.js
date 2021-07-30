@@ -35,3 +35,15 @@ export const deleteItem = async (token, itemId) =>
       Authorization: `Bearer ${token}`,
     },
   })
+
+//function to retrieve a single item
+export const read = async (itemId) =>
+  await axios.get(`${process.env.REACT_APP_API}/item/${itemId}`)
+
+//send the data to update data of an item, it makes a put request
+export const updateItem = async (token, data, itemId) =>
+  await axios.put(`${process.env.REACT_APP_API}/update-item/${itemId}`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })

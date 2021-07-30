@@ -50,3 +50,15 @@ export const payoutSetting = async (token) =>
       },
     }
   )
+
+//function to get session id
+export const getSessionId = async (token, itemId) =>
+  await axios.post(
+    `${process.env.REACT_APP_API}/session-id`,
+    { itemId },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
