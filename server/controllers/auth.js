@@ -35,15 +35,15 @@ export const register = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-  //to see if it gets the data
-  //console.log(req.body)
-  //verify if the email exist in the database
   const { email, password } = req.body
   try {
+    //to see if it gets the data
+    //console.log(req.body)
+    //verify if the email exist in the database
     let user = await User.findOne({ email }).exec()
     //console.log('User exist', user)
-    //is the user does not exist, it will send status 400 and a message of not found
-    if (!user) res.status(400).send('User account not found')
+    //is the user does not exist, it will send status 400 and a message of not found. Add return keybord id the user is not found the rest of the code will nor execute
+    if (!user) return res.status(400).send('User account not found')
     //if the user exist the app will compare password
     user.comparePassword(password, (err, match) => {
       console.log('Compare password in login err', err)
