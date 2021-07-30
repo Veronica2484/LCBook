@@ -5,7 +5,7 @@ import Connect from '../components/Connect'
 import { Link } from 'react-router-dom'
 import { sellerItems, deleteItem } from '../actions/item'
 import SmallCard from '../components/cards/SmallCard'
-import {toast} from toast;
+import { toast } from 'react-toastify'
 
 const ServicesOwner = () => {
   const { auth } = useSelector((state) => ({ ...state }))
@@ -20,11 +20,11 @@ const ServicesOwner = () => {
     setItems(data)
   }
 
-  const handleItemDelete = async (token, itemId) => {
-    deleteItem (auth.token, itemId).then(res =>{
-      toast.success("Item deleted")
+  const handleItemDelete = async (itemId) => {
+    if (!window.confirm('Do you want to delete it?')) return
+    deleteItem(auth.token, itemId).then((res) => {
+      toast.success('Item deleted')
       loadSellerItems()
-    
     })
   }
 
@@ -57,6 +57,7 @@ const ServicesOwner = () => {
               h={h}
               showViewMoreButton={false}
               owner={true}
+              handleItemDelete={handleItemDelete}
             />
           ))}
         </div>

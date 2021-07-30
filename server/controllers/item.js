@@ -63,3 +63,46 @@ export const sellerItems = async (req, res) => {
 
   res.send(all)
 }
+
+export const remove = async (req, res) => {
+  let removed = await Item.findByIdAndDelete(req.params.itemId)
+    .select('-image.data')
+    .exec()
+  res.json(removed)
+}
+
+//read function to get information from a single item
+export const read = async (req, res) => {
+  let item = await Item.findById(req.params.itemId)
+    .populate('owner', '_id name')
+    .select('-image.data')
+    .exec()
+  console.log('Single Item', item)
+  res.json(item)
+}
+
+export const update = async (req, res) => {
+  try {
+    let fields = req.fields
+    let files = req.files
+
+    let data = { ...fields }
+
+    if (files.image) {
+      let image = {}
+      image.data = fs.readFileSync(files.image.path)
+      image.contentType = files.image.type
+
+      data.image = image
+    }
+    let updated = await Item.findByIdAndUpdate(req.params.itemId, data, {
+      new: true,
+    }).select('-image.data')
+    res.json(updated)
+
+    //combine fields and files and put in a variable
+  } catch {
+    console.log(err)
+    res.status(400).send('Item update failed. Please try again')
+  }
+}

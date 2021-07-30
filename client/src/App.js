@@ -17,6 +17,8 @@ import Register from './auth/Register'
 import Services from './user/Services'
 import ServicesOwner from './user/ServicesOwner'
 import NewItem from './items/newItems'
+import EditItem from './items/EditItem'
+import ViewItem from './items/ViewItem'
 
 // we need to exacute the Nav function into the App
 function App() {
@@ -38,6 +40,8 @@ function App() {
         <PrivateRoute exact path="/services" component={Services} />
         <PrivateRoute exact path="/services/owner" component={ServicesOwner} />
         <PrivateRoute exact path="/items/new" component={NewItem} />
+        <PrivateRoute exact path="/item/edit/:itemId" component={EditItem} />
+        <Route exact path="/item/:itemId" component={ViewItem} />
       </Switch>
     </BrowserRouter>
   )

@@ -8,10 +8,18 @@ import formidable from 'express-formidable'
 const router = express.Router()
 
 //middleware
-import { requireSignin } from '../middlewares'
+import { requireSignin, itemOwner } from '../middlewares'
 //controllers
 //import create function from item controller, which will be used to create a new item
-import { create, items, image, sellerItems } from '../controllers/item'
+import {
+  create,
+  items,
+  image,
+  sellerItems,
+  remove,
+  read,
+  update,
+} from '../controllers/item'
 
 //create endpoint which will receive post request from the client (same "create-item" that in actions/items.js file)
 //apply formidable as a middleware in the router to receive the form data
@@ -24,6 +32,18 @@ router.get('/items', items)
 router.get(`/item/image/:itemId`, image)
 //add a router to get the list of items of a user
 router.get('/seller-items', requireSignin, sellerItems)
+//create delete route
+router.delete('/delete-item/:itemId', requireSignin, itemOwner, remove)
+//end point to get a single item
+router.get('/item/:itemId', read)
+//router to update item
+router.put(
+  '/update-item/:itemId',
+  requireSignin,
+  itemOwner,
+  formidable(),
+  update
+)
 
 export default router
 module.exports = router
