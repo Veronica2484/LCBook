@@ -19,6 +19,7 @@ import {
   remove,
   read,
   update,
+  userItemBookings,
 } from '../controllers/item'
 
 //create endpoint which will receive post request from the client (same "create-item" that in actions/items.js file)
@@ -44,6 +45,9 @@ router.put(
   formidable(),
   update
 )
+
+//create a route to display the items booked by an user
+router.get('/user-item-bookings', requireSignin, userItemBookings)
 
 export default router
 module.exports = router

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import React from 'react'
 import { read } from '../actions/item'
 import { useSelector } from 'react-redux'
-import { getSessionId } from '../actions/stripe'
 
 const ViewItem = ({ match, history }) => {
   //add the response that it gets from effect in a state
@@ -10,7 +9,6 @@ const ViewItem = ({ match, history }) => {
   const [image, setImage] = useState('')
 
   const { auth } = useSelector((state) => ({ ...state }))
-
   useEffect(() => {
     loadSellerItem()
   }, [])
@@ -21,6 +19,7 @@ const ViewItem = ({ match, history }) => {
     //console.log(res)
     setItem(res.data)
     setImage(`${process.env.REACT_APP_API}/item/image/${res.data._id}`)
+    console.log(res.data)
   }
 
   //function to readress an user not logged
@@ -32,10 +31,8 @@ const ViewItem = ({ match, history }) => {
       history.push('/login')
       return
     }
-    if (!auth) history.push('/login')
-    console.log(auth.token, match.params.itemId)
-    let res = await getSessionId(auth.token, match.params.itemId)
-    console.log('get sessionId response', res.data.sessionId)
+    if (auth) history.push(`/booking/checkout/${match.params.itemId}`)
+    //console.log('you are here')
   }
 
   return (

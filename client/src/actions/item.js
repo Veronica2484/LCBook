@@ -47,3 +47,11 @@ export const updateItem = async (token, data, itemId) =>
       Authorization: `Bearer ${token}`,
     },
   })
+
+//fc to make the request to get all items request
+export const userItemBookings = async (token) =>
+  await axios.get(`${process.env.REACT_APP_API}/user-item-bookings`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })

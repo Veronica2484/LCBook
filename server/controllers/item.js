@@ -1,5 +1,7 @@
 import Item from '../models/item'
 import fs from 'fs'
+import Order from '../models/order'
+import User from '../models/user'
 
 export const create = async (req, res) => {
   //to confirm in the console that the request is done to the correct endpoint
@@ -105,4 +107,25 @@ export const update = async (req, res) => {
     console.log(err)
     res.status(400).send('Item update failed. Please try again')
   }
+}
+
+//create a fc to display list of items
+// export const userItemBookings = async (req, res) => {
+//   //add in a varible all the items ordered by an user getting them by userId
+//   const all = await User.findById(req.user._id)
+//     .select('_id')
+//     .populate('item', '-image.data')
+//     .populate('orderedBy', 'id name')
+//     .exec()
+//   res.json(all)
+// }
+
+//create a fc to display list of items
+export const userItemBookings = async (req, res) => {
+  const all = await Order.find({ orderedBy: req.user._id })
+    .select('orderedBy')
+    .populate('item', '-image.data')
+    .populate('orderedBy', '_id name')
+    .exec()
+  res.json(all)
 }
