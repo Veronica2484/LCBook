@@ -1,8 +1,9 @@
 import expressJwt from 'express-jwt'
 import Item from '../models/item'
-// req.user
+
+//it requireSignin fc will be aplied to any route which will be protected
 export const requireSignin = expressJwt({
-  // secret, expiryDate
+  // it will check the secret, expiryDate from the token generated in the login fc
   secret: process.env.JWT_SECRET,
   algorithms: ['HS256'],
 })

@@ -7,6 +7,7 @@ const { Meta } = Card
 const Connect = () => {
   const { auth } = useSelector((state) => ({ ...state }))
   const { user } = auth
+
   return (
     <div className="d-flex justify-content-around">
       <Card className="">

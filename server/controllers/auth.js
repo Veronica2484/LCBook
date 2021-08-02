@@ -35,10 +35,10 @@ export const register = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-  const { email, password } = req.body
   try {
     //to see if it gets the data
     //console.log(req.body)
+    const { email, password } = req.body
     //verify if the email exist in the database
     let user = await User.findOne({ email }).exec()
     //console.log('User exist', user)
@@ -49,7 +49,7 @@ export const login = async (req, res) => {
       console.log('Compare password in login err', err)
       if (!match || err) return res.status(400).send('Wrong password')
       //console.log('Generate a token then send as response to client')
-      //Generate token, first arguments is the payload data, second arg is the secret varible
+      //Generate token using the JWT_SECRET variable storaged in env file, first arguments is the payload data, second arg is the secret variable
       //third argument expire date
       let token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
         expiresIn: '7d',

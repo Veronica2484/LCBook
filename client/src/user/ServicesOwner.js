@@ -10,6 +10,8 @@ import { toast } from 'react-toastify'
 const ServicesOwner = () => {
   const { auth } = useSelector((state) => ({ ...state }))
   const [items, setItems] = useState([])
+  // //to display a loading state when the user makes a request to set up an account
+  // const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     loadSellerItems()
