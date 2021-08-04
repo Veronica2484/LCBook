@@ -1,16 +1,28 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
-import { read } from '../actions/item'
+import { read, isItemAlreadyBooked } from '../actions/item'
+import moment from 'moment'
 import { useSelector } from 'react-redux'
 
 const ViewItem = ({ match, history }) => {
   //add the response that it gets from effect in a state
   const [item, setItem] = useState({})
   const [image, setImage] = useState('')
+  const [isAlreadyBooked, setIsAlreadyBooked] = useState(false)
 
   const { auth } = useSelector((state) => ({ ...state }))
   useEffect(() => {
     loadSellerItem()
+  }, [])
+
+  //use effect
+  useEffect(() => {
+    if (auth && auth.token) {
+      isItemAlreadyBooked(auth.token, match.params.itemId).then((res) => {
+        //console.log(res)
+        if (res.data.ok) setIsAlreadyBooked(true)
+      })
+    }
   }, [])
 
   const loadSellerItem = async () => {
@@ -55,10 +67,12 @@ const ViewItem = ({ match, history }) => {
               {item.from && item.to ? (
                 <>
                   <p className="card-text">
-                    Available from {new Date(item.from).toLocaleDateString()}
+                    {/* Available from {new Date(item.from).toLocaleDateString()} */}
+                    From {moment(new Date(item.from)).format('MMMM Do YYYY')}
                   </p>
                   <p className="card-text">
-                    Available to {new Date(item.to).toLocaleDateString()}
+                    {/* Available to {new Date(item.to).toLocaleDateString()} */}
+                    To {moment(new Date(item.to)).format('MMMM Do YYYY')}
                   </p>
                 </>
               ) : (
@@ -68,11 +82,17 @@ const ViewItem = ({ match, history }) => {
             <br />
             <i>Posted by {item.owner && item.owner.name}</i>
             <br />
+
             <button
               onClick={handleClick}
               className="btn btn-block btn-lg btn-primary mt-3"
+              disabled={isAlreadyBooked}
             >
-              {auth && auth.token ? 'Book Now' : 'Login to book'}
+              {isAlreadyBooked
+                ? 'Already Booked'
+                : auth && auth.token
+                ? 'Book Now'
+                : 'Login to Book'}
             </button>
           </div>
 

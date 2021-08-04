@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { userItemBookings } from '../actions/item'
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
+import BookingCard from '../components/cards/BookingCard'
 
 const Services = () => {
   //access to the token from auth state
@@ -48,7 +49,10 @@ const Services = () => {
       </div>
 
       <div className="row">
-        <pre>{JSON.stringify(booking, null, 4)}</pre>
+        {/* <pre>{JSON.stringify(booking, null, 4)}</pre> */}
+        {booking.map((b) => (
+          <BookingCard key={b._id} item={b.item} orderedBy={b.orderedBy} />
+        ))}
       </div>
     </>
   )

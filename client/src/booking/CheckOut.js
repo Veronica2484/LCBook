@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { createOrder } from '../actions/order'
 import { LoadingOutlined } from '@ant-design/icons'
+import { toast } from 'react-toastify'
 
 const CheckOut = ({ match, history }) => {
   // const {
@@ -27,6 +28,7 @@ const CheckOut = ({ match, history }) => {
     createOrder(token, match.params.itemId).then((res) => {
       if (res.data.success) {
         //console.log('Success response', res.data)
+        toast.success('New order has been created')
         history.push('/services')
       } else {
         res.send('The booking was not successfule, try again')

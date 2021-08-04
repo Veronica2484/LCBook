@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 //import
 import NavBar from './components/NavBar'
 import PrivateRoute from './components/PrivateRoute'
+import Footer from './components/Footer'
 
 //App component will import the rest of the components
 //of the entire application based on its path as ./booking/Home
@@ -20,7 +21,7 @@ import NewItem from './items/NewItem'
 import EditItem from './items/EditItem'
 import ViewItem from './items/ViewItem'
 import CheckOut from './booking/CheckOut'
-import Confirmation from './booking/Confirmation'
+import SearchItem from './items/SearchItem'
 
 // we need to exacute the Nav function into the App
 function App() {
@@ -50,12 +51,10 @@ function App() {
           path="/booking/checkout/:itemId"
           component={CheckOut}
         />
-        <PrivateRoute
-          exact
-          path="/booking/confirmation"
-          component={Confirmation}
-        />
+        <Route exact path="/search-result" component={SearchItem} />
+        <Route path="/search/:keyword" component={Home} />
       </Switch>
+      <Footer />
     </BrowserRouter>
   )
 }

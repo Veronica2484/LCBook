@@ -39,7 +39,18 @@ export const create = async (req, res) => {
 }
 
 export const items = async (req, res) => {
-  let all = await Item.find({})
+  //create a variable called keyword to check if the keyword if found
+  const keyword = req.query.keyword
+    ? {
+        itemTitle: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {}
+  //to filter the item from today on
+  //let all = await Item.find({ from: { Sgte: new Date() } })
+  let all = await Item.find({ ...keyword })
     .limit(24)
     .select('-image.data')
     .populate('owner', '_id name')
@@ -128,4 +139,34 @@ export const userItemBookings = async (req, res) => {
     .populate('orderedBy', '_id name')
     .exec()
   res.json(all)
+}
+
+//fc to check if an item is already booked
+export const isItemAlreadyBooked = async (req, res) => {
+  const { itemId } = req.params
+  //retrieve items order of the current logged user
+  const userOrders = await Order.find({ orderedBy: req.user._id })
+    .select('item')
+    .exec()
+
+  //check if item id is found in userOrders array
+  let ids = [] //push order of the user in this array and then check if an itemId is found there
+  for (let i = 0; i < userOrders.length; i++) {
+    ids.push(userOrders[i].item.toString())
+  }
+  res.json({
+    //this will check if an itemId is included in the ids orders array, it will give true or false
+    ok: ids.includes(itemId),
+  })
+}
+
+//fc to listing the searched items
+export const searchListings = async (req, res) => {
+  const { city, date } = req.body
+  //to see in the console the res
+  console.log(city, date)
+  let result = await Item.find({ from: { $gte: new Date() }, city })
+    .select('-image.data')
+    .exec()
+  res.json(result)
 }
