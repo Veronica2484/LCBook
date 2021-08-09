@@ -17,12 +17,13 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 require('dotenv').config()
 
+//const app. it´s a fc that represents the express module
 const app = express()
 
-//MongoDB conncetion
+//MongoDB connection
 mongoose
   .connect(process.env.DATABASEBook, {
-    //we pass as a second argument of the fc these configuration options to avoid some warnings in the
+    //we pass as a second argument of the fc these configuration options to avoid some warnings in the console
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
@@ -53,6 +54,7 @@ readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)))
 //app.use('/api', router)
 
 //Once I create an .env doc I have access to the port variable from it
+//the port variable will allow our server to listen the local port 8000 and the cloud host port system, like Heroku port
 const port = process.env.PORT || 8000
 
-app.listen(8000, () => console.log('Server is running on port 8000'))
+app.listen(port, () => console.log('Server is running on port 8000'))

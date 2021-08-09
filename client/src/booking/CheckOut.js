@@ -31,7 +31,7 @@ const CheckOut = ({ match, history }) => {
         toast.success('New order has been created')
         history.push('/services')
       } else {
-        res.send('The booking was not successfule, try again')
+        res.send('The booking was not successful, try again')
       }
     })
   }, [match.params.itemId])

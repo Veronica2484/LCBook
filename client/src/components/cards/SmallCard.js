@@ -85,9 +85,9 @@ const SmallCard = ({
               />
             ) : (
               <img
-                src="https://via.placeholder.com/100x100.png?text=item"
+                src="https://via.placeholder.com/900x500.png?text=item"
                 alt="item"
-                className="card-image img img-fluid"
+                className="card-image img img-fluid-preview"
               />
             )}
           </div>
