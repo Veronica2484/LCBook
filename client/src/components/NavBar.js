@@ -25,7 +25,7 @@ const NavBar = () => {
   }
 
   return (
-    <div className="nav d-flex justify-content-between col-sm text-center">
+    <div className="nav d-flex justify-content-between col-sm text-center font">
       <img
         src="/logo.png"
         width="10%"

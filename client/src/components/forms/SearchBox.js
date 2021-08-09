@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 //hooks to access to the history
-import { useHistory } from 'react-router-dom'
+//import { useHistory } from 'react-router-dom'
 
 const SearchBox = ({ history }) => {
   //set the state
@@ -22,7 +22,7 @@ const SearchBox = ({ history }) => {
         type="text"
         name="keyword"
         onChange={(e) => setKeyword(e.target.value)}
-        placeholder="Search..."
+        placeholder="Search book title..."
         className="search-box text-center"
       ></input>
 

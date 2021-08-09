@@ -9,7 +9,8 @@ export const createItem = async (token, data) =>
     },
   })
 
-//function to get the list of the items, add the keyword an set as default empty to add the funtionality search, pass the quey string on the route
+//function to get the list of the items,
+//add the keyword an set as default empty to add the funtionality search, pass the quey string on the route
 export const listOfItems = async (keyword = '') =>
   await axios.get(`${process.env.REACT_APP_API}/items?keyword=${keyword}`)
 

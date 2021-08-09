@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { listOfItems } from '../actions/item'
 import SmallCard from '../components/cards/SmallCard'
-import Search from '../components/forms/Search'
+//import Search from '../components/forms/Search'
 
 //create a arrow function
 //useSelector takes a function and returns the state
@@ -15,6 +15,7 @@ const Home = ({ match }) => {
     loadAllitems(keyword)
   }, [keyword])
 
+  //pass the keyborad to the fc
   const loadAllitems = async () => {
     let res = await listOfItems(keyword)
     setItems(res.data)
