@@ -14,8 +14,10 @@ export const register = async (req, res) => {
     //as the app receives the data in JSON format, it is needed to apply a milddleware in order to be able to read it
     console.log(req.body)
     const { name, email, password } = req.body
-    //validate name and password
+    //validate name, email and password
     if (!name) return res.status(400).send('Name is required')
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
+    if (!regex.test(email)) res.status(400).send('Invalid email format')
     if (!password || password.length < 6)
       return res
         .status(400)

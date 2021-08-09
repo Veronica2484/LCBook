@@ -31,6 +31,7 @@ const Register = ({ history }) => {
         email,
         password,
       })
+
       //we see this message in the console
       console.log('REGISTER USER ===>', res)
       //add the toast function to see the toast message

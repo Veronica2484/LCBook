@@ -37,6 +37,8 @@ const NewItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     //console.log(values)
+    //validation for form fields
+    validate(values)
 
     //instance Form Data
     let itemData = new FormData()
@@ -58,14 +60,33 @@ const NewItem = () => {
       let res = await createItem(token, itemData)
       console.log('Created item res', res)
       toast.success('New item has been added')
-      //empty the fields after 1 sec, reload
+      //empty the fields after 2 sec, reload
       setTimeout(() => {
         window.location.reload()
       }, 2000)
     } catch (err) {
+      //print out in the console and send a toast message if there was an error saving the data in the cloud storage(create fc in the controller)
       console.log(err)
-      toast.error(err.response.data)
+      // toast.error(err.response.data)
     }
+  }
+
+  //Validation of the Item register fields
+
+  const validate = (values) => {
+    let errors = {}
+    if (!values.itemTitle) {
+      toast('Please fill the item title.')
+    } else if (!values.author) {
+      toast('Please fill author')
+    } else if (!values.city) {
+      toast('Please fill city')
+    } else if (!values.status) {
+      toast('Please fill status')
+    } else if (!values.price) {
+      toast('Please fill price')
+    }
+    return errors
   }
 
   const handleImageChange = (e) => {
@@ -101,9 +122,9 @@ const NewItem = () => {
             <img
               src={preview}
               alt="preview_image"
-              className="img img-fluid m-2"
+              className="img img-fluid-preview m-2"
             />
-            <pre>{JSON.stringify(values, null, 4)}</pre>
+            {/* <pre>{JSON.stringify(values, null, 4)}</pre> */}
           </div>
         </div>
       </div>

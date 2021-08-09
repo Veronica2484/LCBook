@@ -17,7 +17,6 @@ const RegistrationForm = ({
         placeholder="Enter name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        required
       />
     </div>
 
@@ -29,7 +28,6 @@ const RegistrationForm = ({
         placeholder="Enter email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        required
       />
     </div>
 
@@ -41,12 +39,10 @@ const RegistrationForm = ({
         placeholder="Enter password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        required
       />
     </div>
-    <button disabled={!name || !email || !password} className="btn btn-primary">
-      Submit
-    </button>
+    {/* <button disabled={!name || !email || !password} className="btn btn-primary"> */}
+    <button className="btn btn-primary">Submit</button>
   </form>
 )
 
