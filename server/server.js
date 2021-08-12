@@ -1,7 +1,7 @@
 // import express into a variable it is equal to impor from in React
 
 //path for deployment
-import path from 'path'
+const path = require('path')
 //npm esm package allows to import and export components easily
 //after install esm
 //const express = require('express') we can change this importation to the import way
