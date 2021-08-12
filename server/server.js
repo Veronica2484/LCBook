@@ -1,7 +1,7 @@
 // import express into a variable it is equal to impor from in React
 
 //path for deployment
-const path = require('path')
+import path from 'path'
 //npm esm package allows to import and export components easily
 //after install esm
 //const express = require('express') we can change this importation to the import way
@@ -59,6 +59,7 @@ readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)))
 //app.use('/api', router)
 
 //condition for deployment
+// const __dirname = path.resolve()
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')))
 
@@ -66,7 +67,7 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
   })
 } else {
-  app.get('/', () => {
+  app.get('/', (req, res) => {
     res.sendFile('App running')
   })
 }
