@@ -91,12 +91,12 @@ const NewItem = () => {
 
   const handleImageChange = (e) => {
     //console.log(e.target.files[0])
-    //it will set the image in the state and will show the previous image
+    //it will set the image in the state and will show the preview image
     setPreview(URL.createObjectURL(e.target.files[0]))
     setValues({ ...values, image: e.target.files[0] })
   }
 
-  //pupulate the state
+  //pupulate all the user input in the state
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }

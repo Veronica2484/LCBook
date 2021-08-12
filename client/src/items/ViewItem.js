@@ -38,7 +38,7 @@ const ViewItem = ({ match, history }) => {
   const handleClick = async (e) => {
     e.preventDefault()
 
-    //Add tje return keyword so the rest of the code does not execute when the user is readdress to login
+    //Add the return keyword so the rest of the code does not execute when the user is readdress to login
     if (!auth || !auth.token) {
       history.push('/login')
       return
@@ -52,7 +52,6 @@ const ViewItem = ({ match, history }) => {
       <div className="container-fluid services p-5 text-center">
         <h2>{item.itemTitle}</h2>
       </div>
-
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-6">

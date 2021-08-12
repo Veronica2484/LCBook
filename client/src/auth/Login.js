@@ -23,9 +23,9 @@ const Login = ({ history }) => {
           'Save user res in redux and local storage then redirect ===>'
         )
         // console.log(res.data)
-        //save user and token to local storage
+        //user and token are saved in the local storage
         window.localStorage.setItem('auth', JSON.stringify(res.data))
-        //save user and token to redux
+        //user and token saved to redux
         dispatch({
           type: 'LOGGED_IN_USER',
           payload: res.data,

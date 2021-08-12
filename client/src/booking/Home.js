@@ -6,7 +6,7 @@ import SmallCard from '../components/cards/SmallCard'
 //create a arrow function
 //useSelector takes a function and returns the state
 const Home = ({ match }) => {
-  //check the keyword entered in the ser¡arch box
+  //check the keyword entered in the search box
   const keyword = match.params.keyword
   //create the item state
   const [items, setItems] = useState([])

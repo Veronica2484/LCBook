@@ -47,4 +47,5 @@ const itemSchema = new Schema(
   { timestamps: true }
 )
 
+//export to use it in controllers
 export default mongoose.model('Item', itemSchema)

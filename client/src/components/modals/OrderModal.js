@@ -13,6 +13,7 @@ const OrderModal = ({ item, orderedBy, showModal, setShowModal }) => {
       <p> OrderedBy: {orderedBy.name}</p>
       <p> Id: {orderedBy._id}</p>
       <p> Payment status: Paid</p>
+      {/* <p> Status: {item.status}</p> */}
       <p> Amount: {item.price}€</p>
       {/* <p> Date: {order.date}</p> */}
     </Modal>

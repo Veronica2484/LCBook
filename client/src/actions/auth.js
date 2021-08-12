@@ -1,4 +1,4 @@
-//Funtionas to post and get data
+//Funtions to post and get data
 import axios from 'axios'
 
 //register function

@@ -10,7 +10,7 @@ export const createItem = async (token, data) =>
   })
 
 //function to get the list of the items,
-//add the keyword an set as default empty to add the funtionality search, pass the quey string on the route
+//add the keyword an set as default empty to add the funtionality search, pass the query string on the route
 export const listOfItems = async (keyword = '') =>
   await axios.get(`${process.env.REACT_APP_API}/items?keyword=${keyword}`)
 
@@ -57,7 +57,7 @@ export const userItemBookings = async (token) =>
     },
   })
 
-//fc to macke a request to check if a item is already booked. It twill pass the itemId in the URL
+//fc to make a request to check if a item is already booked. It twill pass the itemId in the URL
 export const isItemAlreadyBooked = async (token, itemId) =>
   await axios.get(`${process.env.REACT_APP_API}/is-already-booked/${itemId}`, {
     headers: {
@@ -68,3 +68,7 @@ export const isItemAlreadyBooked = async (token, itemId) =>
 //fc to make a request to search for item
 export const searchListings = async (query) =>
   await axios.post(`${process.env.REACT_APP_API}/search-listings`, query)
+
+//fc to make a request to check if a item is already booked. It twill pass the itemId in the URL
+// export const isItemBooked = async (itemId) =>
+//   await axios.get(`${process.env.REACT_APP_API}/is-item-booked/${itemId}`)

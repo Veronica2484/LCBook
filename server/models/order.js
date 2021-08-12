@@ -13,4 +13,5 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+//export to use it in controllers
 export default mongoose.model('Order', orderSchema)

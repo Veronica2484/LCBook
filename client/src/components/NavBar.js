@@ -16,9 +16,11 @@ const NavBar = () => {
 
   const logout = () => {
     dispatch({
+      //dispatch will send the action type and payload to log out the user
       type: 'LOGOUT',
       payload: null,
     })
+    //empty the user from local storage
     window.localStorage.removeItem('auth')
     //push the user to the login once it is logged out
     history.push('/login')
@@ -48,9 +50,9 @@ const NavBar = () => {
 
       {auth !== null && (
         //add the pointer class to add a pointer to the logout function
-        <href className="nav-link pointer  m-4 " onClick={logout}>
+        <h className="nav-link pointer  m-4 " onClick={logout}>
           Logout
-        </href>
+        </h>
       )}
 
       {auth === null && (

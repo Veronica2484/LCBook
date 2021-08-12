@@ -5,7 +5,6 @@ import express from 'express'
 const router = express.Router()
 
 //this function takes two arguments, the URL and the callbakc fc that has the request and response object
-
 //controllers
 import { register, login } from '../controllers/auth'
 

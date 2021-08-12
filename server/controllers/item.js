@@ -19,6 +19,7 @@ export const create = async (req, res) => {
     item.owner = req.user._id
     //read files
     if (files.image) {
+      //read the entire file before save the data using readFileSync
       item.image.data = fs.readFileSync(files.image.path)
       item.image.contentType = files.image.type
     }
@@ -39,11 +40,12 @@ export const create = async (req, res) => {
 }
 
 export const items = async (req, res) => {
-  //create a variable called keyword to check if the keyword if found
+  //create a variable called keyword to check if the keyword is found
   const keyword = req.query.keyword
     ? {
         itemTitle: {
-          $regex: req.query.keyword,
+          //match the keyword to the itemTitle
+          $regex: req.query.keyword, //with this the search function will retrieve similar keywords not exactly the same
           $options: 'i',
         },
       }

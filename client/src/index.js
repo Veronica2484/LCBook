@@ -15,12 +15,12 @@ Action, function that returns an object
 Reducer,
 Dispatch
  */
-//1. import from react-redux and redux
+//import from react-redux and redux
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-//4. Redux Store. Glabzalized state. Holds all the data for the application
+//Redux Store. Glabalized state. Holds all the data for the application
 const store = createStore(rootReducer, composeWithDevTools())
 
 //ReactDOM is rendering the App component. This components has

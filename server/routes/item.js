@@ -22,6 +22,7 @@ import {
   userItemBookings,
   isItemAlreadyBooked,
   searchListings,
+  // isItemBooked,
 } from '../controllers/item'
 
 //create endpoint which will receive post request from the client (same "create-item" that in actions/items.js file)
@@ -54,6 +55,9 @@ router.get('/user-item-bookings', requireSignin, userItemBookings)
 router.get('/is-already-booked/:itemId', requireSignin, isItemAlreadyBooked)
 //route to display the list of item searched
 router.post('/search-listings', searchListings)
+
+//check if a item is already booked to disable the book button
+// router.get('/is-item-booked/:itemId', isItemBooked)
 
 export default router
 module.exports = router

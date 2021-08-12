@@ -11,7 +11,8 @@ import jwt from 'jsonwebtoken'
 
 export const register = async (req, res) => {
   try {
-    //as the app receives the data in JSON format, it is needed to apply a milddleware in order to be able to read it
+    //as the app receives the data in JSON format, it is needed to apply a middleware
+    //in order to be able to read it
     console.log(req.body)
     const { name, email, password } = req.body
     //validate name, email and password
@@ -22,12 +23,13 @@ export const register = async (req, res) => {
       return res
         .status(400)
         .send('Password is required and minimun 6 char long')
+    //query the database to check if the email already exist
     let userExist = await User.findOne({ email }).exec()
     if (userExist) return res.status(400).send('Email already exist')
     //register the new user based in the data from the schema
     const user = new User(req.body)
     await user.save()
-    console.log('Registration successfull', user)
+    console.log('Registration successful', user)
     //response to send
     return res.json({ ok: true })
   } catch (err) {

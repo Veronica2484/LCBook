@@ -71,6 +71,7 @@ const ItemEditForm = (props) => {
         >
           <Option value="Sell">Sell</Option>
           <Option value="Exchange">Exchange</Option>
+          <Option value="Give away">Give away</Option>
         </Select>
 
         <input
