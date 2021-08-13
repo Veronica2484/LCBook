@@ -1,14 +1,39 @@
 {
-  "dependencies": {
-    "react-redux": "^7.2.4",
-    "redux": "^4.1.0",
-    "redux-devtools-extension": "^2.13.9"
-  },
-  "devDependencies": {
-    "concurrently": "^6.2.1"
-  },
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Book server",
+  "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "heroku-postbuild" : "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-  }
+    "start": "nodemon -r esm server/server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Veronica2484/LCBook.git"
+  },
+  "keywords": [
+    "c!vavQ#6HczR"
+  ],
+  "author": "Veronica Condori",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "express-jwt": "^6.0.0",
+    "install": "^0.13.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12",
+    "query-string": "^7.0.1",
+    "stripe": "^8.167.0"
+  },
+  "bugs": {
+    "url": "https://github.com/Veronica2484/LCBook/issues"
+  },
+  "homepage": "https://github.com/Veronica2484/LCBook#readme"
 }
