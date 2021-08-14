@@ -69,7 +69,7 @@ readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)))
 //condition for deployment
 const resolvedDirectory = path.resolve()
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(resolvedDirectory, '/client/build')))
+  app.use(express.static(path.join(resolvedDirectory, '../client/build')))
   app.get('*', (req, res) =>
     // res.sendFile(path.resolve(__dirname, "../client", "public", "index.html"))
     res.sendFile(
