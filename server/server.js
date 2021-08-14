@@ -8,9 +8,6 @@ import path from 'path'
 import express from 'express'
 //the express server is storaged in the app variable
 //import router from './routes/auth'
-// import router from './routes/auth.js'
-// import router from './routes/item.js'
-// import router from './routes/order.js'
 
 //import a module from FS(filesystem) to import all the components inside
 //of the routes folder which will make it easier to work with the next files
@@ -57,10 +54,6 @@ app.use(express.json()) /
   )
 
 app.use(bodyParser.json())
-
-// app.use('/api/auth/register', auth)
-// app.use('/api/item', item)
-// app.use('/api/order', order)
 
 //to run a router we need to use a middleware, that is a fc that runs on the middle
 //sync fc will automatically load others routes from the routes folder.
