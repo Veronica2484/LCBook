@@ -27,13 +27,16 @@ const app = express()
 
 //MongoDB connection
 mongoose
-  .connect(process.env.DATABASEBOOK, {
-    //we pass as a second argument of the fc these configuration options to avoid some warnings in the console
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
+  .connect(
+    'mongodb+srv://adm-veronica:veronica123@bookap.7aix8.mongodb.net/bookap?retryWrites=true&w=majority',
+    {
+      //we pass as a second argument of the fc these configuration options to avoid some warnings in the console
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    }
+  )
   .then(() => console.log('BD Connected'))
   //catch the error connection
   .catch((err) => console.log('DB ConnectionErro : ', err))
