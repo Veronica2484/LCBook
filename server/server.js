@@ -27,7 +27,7 @@ const app = express()
 
 //MongoDB connection
 mongoose
-  .connect(process.env.DATABASEBook, {
+  .connect(process.env.DATABASEBOOK, {
     //we pass as a second argument of the fc these configuration options to avoid some warnings in the console
     useNewUrlParser: true,
     useFindAndModify: false,
