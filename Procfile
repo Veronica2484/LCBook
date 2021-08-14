@@ -1,1 +1,1 @@
-web: cd server && nodemon -r esm server.js && cd..
+web: cd server && nodemon -r esm server.js
