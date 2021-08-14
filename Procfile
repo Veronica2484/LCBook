@@ -1,1 +1,1 @@
-web: nodemon -r esm server.js
+web: cd server && nodemon -r esm server.js

@@ -67,18 +67,24 @@ readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)))
 //app.use('/api', router)
 
 //condition for deployment
+// const __dirname = path.resolve()
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, '/client/build')))
+//   app.get('*', (req, res) =>
+//     // res.sendFile(path.resolve(__dirname, "../client", "public", "index.html"))
+//     res.sendFile(path.resolve(__dirname, '/client/build/index.html'))
+//   )
+// } else {
+//   app.get('/', (req, res) => {
+//     res.send('Api running.')
+//   })
+// }
+
 const __dirname = path.resolve()
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/client/build')))
-  app.get('*', (req, res) =>
-    // res.sendFile(path.resolve(__dirname, "../client", "public", "index.html"))
-    res.sendFile(path.resolve(__dirname, '/client/build/index.html'))
-  )
-} else {
-  app.get('/', (req, res) => {
-    res.send('Api running.')
-  })
-}
+app.use(express.static(path.join(__dirname, '../client/build')))
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+)
 
 //Once I create an .env doc I have access to the port variable from it
 //the port variable will allow our server to listen the local port 8000 and the cloud host port system, like Heroku port
