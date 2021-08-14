@@ -27,16 +27,13 @@ const app = express()
 
 //MongoDB connection
 mongoose
-  .connect(
-    'mongodb+srv://adm-veronica:veronica123@bookap.7aix8.mongodb.net/bookap?retryWrites=true&w=majority',
-    {
-      //we pass as a second argument of the fc these configuration options to avoid some warnings in the console
-      useNewUrlParser: true,
-      useFindAndModify: false,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    }
-  )
+  .connect(process.env.DATABASEBOOK, {
+    //we pass as a second argument of the fc these configuration options to avoid some warnings in the console
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
   .then(() => console.log('BD Connected'))
   //catch the error connection
   .catch((err) => console.log('DB ConnectionErro : ', err))
@@ -61,7 +58,6 @@ app.use(bodyParser.json())
 //to run a router we need to use a middleware, that is a fc that runs on the middle
 //sync fc will automatically load others routes from the routes folder.
 //fs.readdirSync('./routes').map((r) => app.use('api/', require(`./routes/${r}`)))
-const __dirname = path.resolve()
 readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)))
 
 // const file = fs.readFileSync("../file.xml");
@@ -71,9 +67,9 @@ readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)))
 //app.use('/api', router)
 
 //condition for deployment
-
+const __dirname = path.resolve()
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')))
+  app.use(express.static(path.join(__dirname, '/client/build')))
 
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
