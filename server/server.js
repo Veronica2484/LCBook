@@ -8,6 +8,10 @@ import path from 'path'
 import express from 'express'
 //the express server is storaged in the app variable
 //import router from './routes/auth'
+// import router from './routes/auth.js'
+// import router from './routes/item.js'
+// import router from './routes/order.js'
+
 //import a module from FS(filesystem) to import all the components inside
 //of the routes folder which will make it easier to work with the next files
 //import fs from 'fs'
@@ -53,15 +57,25 @@ app.use(express.json()) /
   )
 
 app.use(bodyParser.json())
+
+// app.use('/api/auth/register', auth)
+// app.use('/api/item', item)
+// app.use('/api/order', order)
+
 //to run a router we need to use a middleware, that is a fc that runs on the middle
 //sync fc will automatically load others routes from the routes folder.
 //fs.readdirSync('./routes').map((r) => app.use('api/', require(`./routes/${r}`)))
+const __dirname = path.resolve()
 readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)))
+
+// const file = fs.readFileSync("../file.xml");
+// const path = require("path");
+// const file = fs.readFileSync(path.resolve(__dirname, "../file.xml"));
 //route middleware
 //app.use('/api', router)
 
 //condition for deployment
-const __dirname = path.resolve()
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')))
 
