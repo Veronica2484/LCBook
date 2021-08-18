@@ -36,12 +36,15 @@ const itemSchema = new Schema(
     },
     from: {
       type: Date,
+      required: 'Price is required',
     },
     to: {
       type: Date,
+      required: 'Price is required',
     },
     quantity: {
       type: Number,
+      required: 'Price is required',
     },
   },
   { timestamps: true }
