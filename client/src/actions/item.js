@@ -14,14 +14,6 @@ export const createItem = async (token, data) =>
 export const listOfItems = async (keyword = '') =>
   await axios.get(`${process.env.REACT_APP_API}/items?keyword=${keyword}`)
 
-// export const diffDays = (from, to) => {
-//   const day = 24 * 60 * 60 * 1000
-//   const start = new Date(from)
-//   const end = new Date(to)
-//   const difference = Math.round(Math.abs((start - end) / day))
-//   return difference
-// }
-
 export const sellerItems = async (token) =>
   await axios.get(`${process.env.REACT_APP_API}/seller-items`, {
     headers: {
