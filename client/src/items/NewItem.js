@@ -85,6 +85,12 @@ const NewItem = () => {
       toast('Please fill status')
     } else if (!values.price) {
       toast('Please fill price')
+    } else if (!values.quantity) {
+      toast('Please fill quantity')
+    } else if (!values.from) {
+      toast('Please fill from date')
+    } else if (!values.to) {
+      toast('Please fill to date')
     }
     return errors
   }
