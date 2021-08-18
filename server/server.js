@@ -80,12 +80,6 @@ readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)))
 //   })
 // }
 
-const __dirname = path.resolve()
-app.use(express.static(path.join(__dirname, '../client/build')))
-app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/client/build/index.html'))
-)
-
 //Once I create an .env doc I have access to the port variable from it
 //the port variable will allow our server to listen the local port 8000 and the cloud host port system, like Heroku port
 const port = process.env.PORT || 8000

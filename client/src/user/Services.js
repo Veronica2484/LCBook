@@ -14,15 +14,19 @@ const Services = () => {
   //create state for bookings
   const [booking, setBooking] = useState([])
 
+  const loadUserBookings = async () => {
+    try {
+      const res = await userItemBookings(token)
+      setBooking(res.data)
+      console.log(res)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
     loadUserBookings()
   }, [])
-
-  const loadUserBookings = async () => {
-    const res = await userItemBookings(token)
-    console.log(res)
-    setBooking(res.data)
-  }
 
   return (
     <>
@@ -49,7 +53,6 @@ const Services = () => {
       </div>
 
       <div className="row">
-        {/* <pre>{JSON.stringify(booking, null, 4)}</pre> */}
         {booking.map((b) => (
           <BookingCard key={b._id} item={b.item} orderedBy={b.orderedBy} />
         ))}

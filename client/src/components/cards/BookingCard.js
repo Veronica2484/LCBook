@@ -51,7 +51,7 @@ const BookingCard = ({ item, orderedBy }) => {
                 <OrderModal
                   item={item}
                   orderedBy={orderedBy} //items passed as props
-                  showModal={showModal}
+                  showModal={showModal} //those are passed as props to control de visibility of the modal component
                   setShowModal={setShowModal}
                 />
               )}
